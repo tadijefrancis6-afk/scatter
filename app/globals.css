@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #050505;
+  --foreground: #fafafa;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --border: #27272a;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  background: var(--background);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+/* ===== Scatter & Free Spins Animations ===== */
+
+@keyframes scatter-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.4), 0 0 30px rgba(0, 255, 204, 0.2);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.8), 0 0 50px rgba(0, 255, 204, 0.4), 0 0 80px rgba(0, 255, 204, 0.2);
+    filter: brightness(1.3);
+  }
+}
+
+@keyframes scatter-fly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--fly-x, 0px), var(--fly-y, -100px)) scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -200px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes free-spin-pulse {
+  0%, 100% {
+    border-color: rgba(0, 255, 204, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.05);
+  }
+  50% {
+    border-color: rgba(0, 255, 204, 0.7);
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.3), inset 0 0 40px rgba(0, 255, 204, 0.1);
+  }
+}
+
+@keyframes multiplier-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.scatter-landed {
+  animation: scatter-glow 1.2s ease-in-out infinite;
+}
+
+.free-spins-active {
+  animation: free-spin-pulse 2s ease-in-out infinite;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.multiplier-bounce {
+  animation: multiplier-pop 0.4s ease-in-out;
+}
